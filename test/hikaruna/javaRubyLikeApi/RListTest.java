@@ -137,4 +137,117 @@ public class RListTest {
 
 		target.sort();
 	}
+	
+	@Test
+	public void testMin0() {
+		RList<Integer> target = new RList<Integer>();
+		target.add(1);
+		target.add(10);
+		target.add(-100);
+
+		assertEquals(Integer.valueOf(-100), target.min());
+	}
+
+	@Test
+	public void testMin1() {
+		RList<Integer> target = new RList<Integer>();
+		target.add(1);
+		target.add(10);
+		target.add(-100);
+
+		// 20に一番近い数
+		Integer result  = target.min(new Comparator<Integer>() {
+			@Override
+			public int compare(Integer o1, Integer o2) {
+				int base = 20;
+				return Math.abs(base - o1) - Math.abs(base - o2);
+			}
+		});
+		
+		assertEquals(Integer.valueOf(10), result);
+	}
+
+	@Test
+	public void testMax0() {
+		RList<Integer> target = new RList<Integer>();
+		target.add(1);
+		target.add(10);
+		target.add(-100);
+
+		assertEquals(Integer.valueOf(10), target.max());
+	}
+
+	@Test
+	public void testMax1() {
+		RList<Integer> target = new RList<Integer>();
+		target.add(1);
+		target.add(10);
+		target.add(-100);
+
+		// 20に一番遠い数
+		Integer result  = target.max(new Comparator<Integer>() {
+			@Override
+			public int compare(Integer o1, Integer o2) {
+				int base = 20;
+				return Math.abs(base - o1) - Math.abs(base - o2);
+			}
+		});
+		
+		assertEquals(Integer.valueOf(-100), result);
+	}
+
+	@Test
+	public void testMinBy0() {
+		RList<Integer> target = new RList<Integer>();
+		target.add(1);
+		target.add(10);
+		target.add(-100);
+
+		assertEquals(Integer.valueOf(-100), target.minBy());
+	}
+
+	@Test
+	public void testMinBy1() {
+		RList<String> target = new RList<String>();
+		target.add("aa");
+		target.add("bbb");
+		target.add("c");
+
+		String result  = target.minBy(new Proc<Integer, String>() {
+			@Override
+			public Integer exec(String arg) {
+				return arg.length();
+			}
+		});
+		
+		assertEquals("c", result);
+	}
+
+	@Test
+	public void testMaxBy0() {
+		RList<Integer> target = new RList<Integer>();
+		target.add(1);
+		target.add(10);
+		target.add(-100);
+
+		assertEquals(Integer.valueOf(10), target.maxBy());
+	}
+
+	@Test
+	public void testMaxBy1() {
+		RList<String> target = new RList<String>();
+		target.add("aa");
+		target.add("bbb");
+		target.add("c");
+
+		String result  = target.maxBy(new Proc<Integer, String>() {
+			@Override
+			public Integer exec(String arg) {
+				return arg.length();
+			}
+		});
+		
+		assertEquals("bbb", result);
+	}
+
 }

@@ -70,4 +70,70 @@ public class RList<E> extends ArrayList<E> {
 	public RList<E> sort(Comparator<E> comparator) {
 		return RListModule.sort(this, comparator);
 	}
+
+	/**
+	 * 最小の要素を返します.
+	 */
+	public E min() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+
+	/**
+	 * 最大の要素を返します.
+	 */
+	public E max() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+
+	/**
+	 * {@link Comparator}の評価結果で各要素の大小判定を行い、最小の要素を返します.
+	 */
+	public E min(Comparator<Integer> comparator) {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+
+	/**
+	 * {@link Comparator}の評価結果で各要素の大小判定を行い、最大の要素を返します.
+	 */
+	public E max(Comparator<Integer> comparator) {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+
+	/**
+	 * 最小の要素を返します.
+	 * @see RList#min()
+	 */
+	public E minBy() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+
+	/**
+	 * 各要素を順番に{@link Proc}に渡して実行し、その評価結果を比較して、最小であった値に対応する元の要素を返します.
+	 */
+	public E minBy(Proc<Integer, String> proc) {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+
+	/**
+	 * 最大の要素を返します.
+	 * @see RList#max()
+	 */
+	public E maxBy() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+
+	/**
+	 * 各要素を順番に{@link Proc}に渡して実行し、その評価結果を比較して、最大であった値に対応する元の要素を返します.
+	 */
+	public E maxBy(Proc<Integer, String> proc) {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
 }

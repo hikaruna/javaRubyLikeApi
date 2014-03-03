@@ -52,7 +52,7 @@ public class RListTest {
 	}
 
 	/**
-	 * {@link Proc}をつけて読んだ場合、その評価値の自然順序によってソートされること.
+	 * {@link Proc}をつけて読んだ場合、その評価値の自然順序によってソートする.
 	 */
 	@Test
 	public void testSortBy1() {
@@ -74,7 +74,7 @@ public class RListTest {
 	}
 
 	/**
-	 * 引数なしで読んだ場合、sortBy()と同様の動作をすること.
+	 * 引数なしで読んだ場合、sortBy()と同様の動作をする.
 	 */
 	@Test
 	public void testSort0() {
@@ -90,7 +90,7 @@ public class RListTest {
 	}
 
 	/**
-	 * {@link Comparator}をつけて読んだ場合、その評価結果によってソートされること.
+	 * {@link Comparator}をつけて読んだ場合、その評価結果によってソートする.
 	 */
 	@Test
 	public void testSort1() {
@@ -100,28 +100,41 @@ public class RListTest {
 		target.add(2);
 
 		// 1に近い数字順
-		RList<Integer> resultNearTen = target.sort(new Comparator<Integer>() {
+		RList<Integer> resultNearOne = target.sort(new Comparator<Integer>() {
 			@Override
 			public int compare(Integer o1, Integer o2) {
 				int base = 1;
-				return (base - o1) - (base - o2);
+				return Math.abs((base - o1)) - Math.abs((base - o2));
 			}
 		});
 
-		assertEquals(Integer.valueOf(2), resultNearTen.get(0));
-		assertEquals(Integer.valueOf(-1), resultNearTen.get(1));
-		assertEquals(Integer.valueOf(4), resultNearTen.get(2));
+		assertEquals(Integer.valueOf(2), resultNearOne.get(0));
+		assertEquals(Integer.valueOf(-1), resultNearOne.get(1));
+		assertEquals(Integer.valueOf(4), resultNearOne.get(2));
 
 		// 絶対値が多い順
-		RList<Integer> resultNearZero = target.sort(new Comparator<Integer>() {
+		RList<Integer> resultAbs = target.sort(new Comparator<Integer>() {
 			@Override
 			public int compare(Integer o1, Integer o2) {
 				return Math.abs(o2) - Math.abs(o1);
 			}
 		});
 
-		assertEquals(Integer.valueOf(4), resultNearZero.get(0));
-		assertEquals(Integer.valueOf(2), resultNearZero.get(1));
-		assertEquals(Integer.valueOf(-1), resultNearZero.get(2));
+		assertEquals(Integer.valueOf(4), resultAbs.get(0));
+		assertEquals(Integer.valueOf(2), resultAbs.get(1));
+		assertEquals(Integer.valueOf(-1), resultAbs.get(2));
+	}
+
+	/**
+	 * 順序付け不能な要素の場合、Comparetableへのキャスト例外を投げる.
+	 */
+	@Test(expected = ClassCastException.class)
+	public void testSort2() {
+		RList<Object> target = new RList<Object>();
+		target.add(1);
+		target.add(true);
+		target.add("hoge");
+
+		target.sort();
 	}
 }
